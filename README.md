@@ -1,1 +1,37 @@
-# Stochastic-Dynamics-Engine
+# Stochastic Dynamics & Monte Carlo Engine 
+
+![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Architecture](https://img.shields.io/badge/architecture-decoupled-orange.svg)
+
+## Overview
+This repository implements a high-performance **Stochastic Differential Equation (SDE) solver** and a **Monte Carlo simulation engine**. 
+
+While the system is robust enough to handle generic multi-dimensional SDEs, it is currently demonstrated on a highly non-linear 5D biophysical system (CA1 Pyramidal Cell Model). By introducing **multiplicative noise** (square-root diffusion) into the slow variables, we quantify how stochastic fluctuations degrade the temporal reliability of the system—a framework mathematically analogous to **stochastic volatility modeling** in quantitative finance.
+
+## Core Architecture (Decoupled Design)
+Unlike monolithic scripts, this engine separates the numerical solver from the business logic:
+*   `core/sde_solvers.py`: The mathematical heart. Implements the **Euler-Maruyama** integration scheme with generalized boundary-clipping protection for robust probability/conductance tracking.
+*   `models/ca1_pyramidal.py`: The payload. Contains the complex deterministic drift and stochastic diffusion tensors of the 5D system.
+*   `utils/signal_processing.py`: Event-driven analysis tools for peak detection and Inter-Burst Interval (IBI) extraction.
+*   `main_monte_carlo.py`: The pipeline. Executes 50 independent Monte Carlo paths with **memory-caching optimization** to reduce redundant computation during statistical aggregation.
+
+## Quantitative Results
+We utilized the Coefficient of Variation (CV) of inter-burst intervals to measure system reliability. Results show a distinct plateau effect in timing degradation as the diffusion coefficient ($\sigma_z$) increases.
+
+<p align="center">
+  <img src="figures/cv_vs_noise.pdf" alt="Monte Carlo CV Results" width="500"/>
+  <br>
+  <em>Figure: Tail-risk and reliability degradation under varying intrinsic noise intensities.</em>
+</p>
+
+## Quick Start
+```bash
+# 1. Clone the repo
+git clone [https://github.com/YourUsername/Stochastic-Dynamics-Engine.git](https://github.com/YourUsername/Stochastic-Dynamics-Engine.git)
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Fire up the Monte Carlo engine
+python main_monte_carlo.py
