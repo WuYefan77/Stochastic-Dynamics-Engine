@@ -20,7 +20,7 @@ Unlike monolithic scripts, this engine separates the numerical solver from the b
 We utilized the Coefficient of Variation (CV) of inter-burst intervals to measure system reliability. Results show a distinct plateau effect in timing degradation as the diffusion coefficient ($\sigma_z$) increases.
 
 <p align="center">
-  <img src="figures/cv_vs_noise.pdf" alt="Monte Carlo CV Results" width="500"/>
+  <img src="figures/cv_vs_noise.png" alt="Monte Carlo CV Results" width="500"/>
   <br>
   <em>Figure: Tail-risk and reliability degradation under varying intrinsic noise intensities.</em>
 </p>
