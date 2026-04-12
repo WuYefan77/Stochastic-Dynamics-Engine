@@ -15,7 +15,7 @@ DEFAULT_G_PARAMS = {
 
 # Steady-state gating functions (Sigmoid forms)
 def m_inf(V): return 1.0 / (1.0 + np.exp(-(V + 30.0) / 9.5))
-def h_inf(V): return 1.0 / (1.0 + np.exp((V + 45.0) / 7.0))  # simplified signs
+def h_inf(V): return 1.0 / (1.0 + np.exp((V + 45.0) / 7.0))  
 def n_inf(V): return 1.0 / (1.0 + np.exp(-(V + 35.0) / 10.0))
 def a_inf(V): return 1.0 / (1.0 + np.exp(-(V + 50.0) / 20.0))
 def b_inf(V): return 1.0 / (1.0 + np.exp((V + 80.0) / 6.0))
